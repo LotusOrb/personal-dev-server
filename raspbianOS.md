@@ -46,13 +46,13 @@ Flashing the OS can be done trought GUI like etcher / rufus or using CLI
         - For linux you must mount the SD card first trhought nautilus or cli
     2. Create file on the SD card called **ssh** and **wpa_supplicant.conf**
     3. open **wpa_supplicant.conf** using notepad++ and add
-    ```config
-    country=ID
-    network={
-        ssid="SSID"
-        psk="PASSWORD"
-    }
-    ```
+        ```config
+        country=ID
+        network={
+            ssid="SSID"
+            psk="PASSWORD"
+        }
+        ```
     4. select *Menu > Edit > EOL Conversion > Unix OSx* and save the file
     5. Remove your SD Card from your pc and put the SD card to raspberry pi
     6. Power the raspberry pi
@@ -64,4 +64,16 @@ Flashing the OS can be done trought GUI like etcher / rufus or using CLI
     12. enable firewall , `sudo ufw allow ssh` & `sudo ufw enable`
     13. voila you have finish the setup
 - #### Headless USB Setup
-    - wip
+    1. Same like Headless wifi setup , but in adition you can skip adding **wpa_suplciant.conf**
+    2. Mount SD card to your PC , in root of the SD card open   config.txt in notepad++  and add
+        ```bash
+        dtoverlay=dwc2
+        ```
+        then save the file
+    3. then open cmdline.txt in notepad++, after **rootwait** append following text with spacing
+        ```bash
+        modules-load=dwc2,g_ether
+        ```
+    4. Plug your raspberry pi throught USB , **DONT PLUG THE USB TO POWER SLOT BUT TO USB SLOT**
+    5. Follow all the step from Headless Wifi , but for the ssh you should use command `ssh pi@raspberry.local`
+    6. Voila you have finished the setup
