@@ -11,6 +11,8 @@
 - <a href="#Initial-Setup">Initial Setup</a>
     - <a href="#Headless-wifi-Setup">Headless Wifi</a>
     - <a href="#Headless-USB-Setup">Headless USB</a>
+- <a href="#Post-Setup">Post Setup</a>
+<!-- - <a href="#Installing-Nginx">Installing Nginx</a> -->
 
 
 ## Requirement
@@ -27,10 +29,10 @@ requirement :
     - [Rufus](https://rufus.ie/)
 - [Notepad++](https://notepad-plus-plus.org/downloads/)
 - [Putty](https://www.putty.org/) or [GNU bash](https://www.gnu.org/software/bash/) for windows
-- [Bonjour](https://developer.apple.com/bonjour/) for ssh throught USB
+- [Bonjour](https://developer.apple.com/bonjour/) for ssh through USB
 
 ## Flashing The OS
-Flashing the OS can be done trought GUI like etcher / rufus or using CLI
+Flashing the OS can be done through GUI like etcher / rufus or using CLI
 
 - With Etcher
     - Put your SD card to your computer
@@ -43,11 +45,11 @@ Flashing the OS can be done trought GUI like etcher / rufus or using CLI
 ## Initial Setup
 - #### Headless wifi Setup
     1. after the flash finish Select the SD card on your windows or mac GUI
-        - For linux you must mount the SD card first trhought nautilus or cli
+        - For linux you must mount the SD card first through  nautilus or cli
     2. Create file on the SD card called **ssh** and **wpa_supplicant.conf**
     3. open **wpa_supplicant.conf** using notepad++ and add
         ```config
-        country=ID
+        country=ID #Follow ISO country code https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
         network={
             ssid="SSID"
             psk="PASSWORD"
@@ -61,19 +63,30 @@ Flashing the OS can be done trought GUI like etcher / rufus or using CLI
     9. enter default password `raspberry`
     10. change your default password using `sudo passwd pi`
     11. update the pi using `sudo apt-get update` & `sudo apt-get upgrade`
-    12. enable firewall , `sudo ufw allow ssh` & `sudo ufw enable`
-    13. voila you have finish the setup
+    12. voila you have finish the setup
 - #### Headless USB Setup
     1. Same like Headless wifi setup , but in adition you can skip adding **wpa_suplciant.conf**
-    2. Mount SD card to your PC , in root of the SD card open   config.txt in notepad++  and add
+    2. Mount SD card to your PC , in root of the SD card open **config.txt** in notepad++  and add
         ```bash
         dtoverlay=dwc2
         ```
         then save the file
-    3. then open cmdline.txt in notepad++, after **rootwait** append following text with spacing
+    3. then open **cmdline.txt** in notepad++, after **rootwait** append following text with spacing
         ```bash
         modules-load=dwc2,g_ether
         ```
-    4. Plug your raspberry pi throught USB , **DONT PLUG THE USB TO POWER SLOT BUT TO USB SLOT**
+    4. Plug your raspberry pi through USB , **PLUG TO USB SLOT ON RASPI NOT THE POWER SLOT**
     5. Follow all the step from Headless Wifi , but for the ssh you should use command `ssh pi@raspberry.local`
     6. Voila you have finished the setup
+
+## Post Setup
+in this section we will be installing some of important but not required software like firewall and other security patch
+- Updating SSH server, run `sudo apt install openssh-server`
+- Installing firewall ***Recommended***
+    1. install ufw `sudo apt install ufw`
+    2. allow ssh access with `sudo ufw allow ssh`
+    3. Enable the firewall with `sudo ufw enable`
+    4. check firewall status with `sudo ufw status`
+
+
+<!-- ## Installing Nginx -->
