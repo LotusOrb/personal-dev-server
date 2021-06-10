@@ -1,0 +1,28 @@
+<title>
+    <%= title %>
+</title>
+
+<!-- START SEO TAG -->
+<meta name="description" content="<%= title %>">
+<!-- FB Opengraph -->
+<meta property="og:title" content="<%= title %>">
+<meta property="og:description" content="<%= title %>">
+<meta property="og:image" content="<%= image %>">
+<meta property="og:url" content="<%= url %>">
+<!-- Twitter Card -->
+<meta name="twitter:title" content="<%= title %>">
+<meta name="twitter:description" content="<%= title %>">
+<meta name="twitter:image" content=" <%= image %>">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- JSON LD -->
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Website",
+        "url": "http://website.com",
+        "name": "<%= url %>",
+        "description": "<%= title %>"
+    }
+</script>
+<!-- END SEO TAG -->
